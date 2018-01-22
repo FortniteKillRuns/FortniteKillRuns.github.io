@@ -60,6 +60,29 @@ margin-left: 270px;
 
   <script type="text/javascript">
 
+  function login(){
+    var email = document.getElementById("txtEmail").value;
+
+    var pass = document.getElementById("txtPassword").value;
+
+    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+  });
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+
+    window.location.href = "index.htm";
+
+
+    }
+
+  });
+
+  }
 
   </script>
 </head>
@@ -84,14 +107,24 @@ margin-left: 270px;
 <center>
 <input id ="txtEmail" type="email" placeholder="Email"> <br />
 <input id ="txtPassword" type="password" placeholder="password"> <br />
-<button id ="btnlogin" onclick="Login()"> Login </button>
+<button id ="btnlogin" onclick="login()"> Login </button>
 </center>
 </div>
 
 
   </div>
-  <scipt src = "fireba.js"></script>
-
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAhLm5VzFkrYgmnNGvf8DP5kbQeoGNqtH0",
+      authDomain: "fortnite-52f2c.firebaseapp.com",
+      databaseURL: "https://fortnite-52f2c.firebaseio.com",
+      projectId: "fortnite-52f2c",
+      storageBucket: "",
+      messagingSenderId: "143505131996"
+    };
+    firebase.initializeApp(config);
+  </script>
 
 </body>
 

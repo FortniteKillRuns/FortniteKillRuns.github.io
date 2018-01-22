@@ -54,11 +54,50 @@ margin-left: 270px;
   border-radius: 10px;
 }
 
+#signoutbut{
+  float:right;
+}
+
 
 
 </style>
 
   <script type="text/javascript">
+
+
+  function register(){
+  var firebaseref = firebase.database().ref();
+  var email = document.getElementById("txtEmail").value;
+  var pass = document.getElementById("txtPassword").value;
+  var username = document.getElementById("txtUserName").value;
+  var database = firebase.database();
+  var isSuccessful = false;
+  firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  });
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      usersRef = firebaseref.child(user.uid);
+      firebase.database().ref(user.uid).set({
+       Username: username,
+       email: email,
+       money: 0
+     });
+isSuccessful = true;
+
+setTimeout(function () {
+changepage();
+}, 2000);
+    }
+    });
+  }
+
+
+function changepage(){
+  window.location.href = "index.htm";
+
+}
 
 
   </script>
@@ -85,7 +124,7 @@ margin-left: 270px;
 <input id ="txtUserName" type="text" placeholder="UserName"> <br />
 <input id ="txtEmail" type="email" placeholder="Email"> <br />
 <input id ="txtPassword" type="password" placeholder="password"> <br />
-<button id ="btnRegister" onclick="Register()"> Register </button>
+<button onclick="register();" id ="btnRegister"> Register </button>
 </center>
 </div>
 
@@ -106,7 +145,7 @@ margin-left: 270px;
       };
       firebase.initializeApp(config);
     </script>
-    <script src="fireba.js"></script>
+
 </body>
 
 </html>

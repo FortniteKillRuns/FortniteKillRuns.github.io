@@ -53,24 +53,72 @@ margin-left: 270px;
   float: right;
   border-radius: 10px;
 }
-//hi
+
+#Username{
+display: inline;
+  color: white;
+  margin-left: -150px;
+  visibility: hidden;
+}
+
+#signoutbut{
+  float:right;
+  visibility: hidden;
+}
+
 
 
 </style>
 
   <script type="text/javascript">
 
+function signout(){
+  firebase.auth().signOut().then(function() {
+
+    location.reload();
+  console.log('Signed Out');
+}, function(error) {
+  console.error('Sign Out Error', error);
+});
+}
+
+  function checkifusersignedin(){
+
+
+var database = firebase.database();
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        user= user;
+        document.getElementById("mainlog").style.visibility = "hidden";
+        document.getElementById("mainreg").style.visibility = "hidden";
+        document.getElementById("signoutbut").style.visibility = "visible";
+document.getElementById("Username").style.visibility = "visible"
+        var userId = firebase.auth().currentUser.uid;
+return firebase.database().ref(userId + '/Username/').once('value').then(function(snapshot) {
+  var username = snapshot.val();
+  // ...
+  document.getElementById("Username").innerHTML = username;
+});
+      } else {
+        // No user is signed in.
+
+    }
+  });
+  }
 
   </script>
 </head>
-<body id="body">
+<body onload="checkifusersignedin();" id="body">
 
   <div id="header">
     <br />
-  <a href="login.htm">  <button class="logreg"> Login </button></a>
-  <a href="Register.htm">  <button class="logreg" style = "margin-left:5px;"> Register </button></a>
-
+  <a href="login.htm" id="mainlog">  <button class="logreg"> Login </button></a>
+  <a href="Register.htm" id="mainreg">  <button class="logreg" style = "margin-left:5px;"> Register </button></a>
+<button onclick="signout();" id="signoutbut" style = "margin-left:5px;"> Sign out </button>
+<h1 class="logreg" style=""id="Username"></h1>
     <h1 id="title">Fortnite Kill Runs </h1>
+
 
 <br />
 <br />
@@ -84,6 +132,7 @@ margin-left: 270px;
 
 
   </div>
+  <scipt src = "fireba.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
   <script>
     // Initialize Firebase
