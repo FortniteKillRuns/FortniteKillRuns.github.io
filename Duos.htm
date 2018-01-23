@@ -126,7 +126,7 @@ margin-left: 90px;
 
 }
 
-#teamkey{
+#teamkey, #roster{
   visibility: hidden;
 }
 
@@ -235,6 +235,7 @@ database.ref(Key + "/Players/").once('value', function(snapshot) {
     document.getElementById("leave").style.visibility = "visible";
         document.getElementById("create").style.visibility = "hidden";
           document.getElementById("teamkey").style.visibility = "visible";
+          document.getElementById("roster").style.visibility = "visible";
 
           return firebase.database().ref(Key + "/Players/" + userId + "/teamcode/").once('value').then(function(snapshot) {
               teamkey = snapshot.val();
@@ -496,7 +497,7 @@ function makeid() {
   <h1 id="Teams"></h1>
   <h1 id="Time">j</h1>
   <h1 id="teamkey"><h1>
-    <h1> Team Roster:</h1>
+    <h1 id="roster"> Team Roster:</h1>
 <h2 id="playerone"> </h2>
 <h2 id="playertwo"> </h2>
 <button onclick="leaveteam();" id="leave"> Leave Team </button>
