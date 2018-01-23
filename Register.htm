@@ -79,6 +79,9 @@ margin-left: 270px;
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       usersRef = firebaseref.child(user.uid);
+      firebase.database().ref('Users/' + user.uid).set({
+        email: email
+      });
       firebase.database().ref(user.uid).set({
        Username: username,
        email: email,
