@@ -58,7 +58,27 @@ margin-left: 270px;
   float:right;
 }
 
+#btnRegister{
+  /* Green */
+border-style: 1px;
+border-color: #2c70d3;
+color: #2c70d3;
 
+padding: 5px 10px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 10px;
+border-radius: 10px;
+
+}
+
+.edit{
+  border: 0;
+padding: 4px 0;
+border-bottom: 1px solid #ccc;
+background-color: transparent;
+}
 
 </style>
 
@@ -72,6 +92,44 @@ margin-left: 270px;
   var username = document.getElementById("txtUserName").value;
   var database = firebase.database();
   var isSuccessful = false;
+  var PSN = document.getElementById("txtPSN").value;
+    var XBL = document.getElementById("txtXboxGamertag").value;
+      var steam = document.getElementById("txtSteam").value;
+        var Fortnite = document.getElementById("txtFortNiteUsername").value;
+          var pword = document.getElementById("txtPasswordRe").value;
+          var x = document.getElementById("Time").value;
+
+if(pass != pword){
+  alert("Passwords do not match");
+
+}
+else if(username =="")
+{
+  alert("Please enter a username");
+}
+else if(email == "")
+{
+  alert("Please enter an email");
+}
+else if(pass.length < 8)
+{
+  alert("Your password is too small. 8 Char Min")
+}
+else if(Fortnite =="")
+{
+  alert("Please enter your Fortnite username");
+}
+else if(PSN == "" && XBL == "" && steam =="")
+{
+  alert("Please enter either an XBL, PSN, or Steam Username");
+}
+else if(x == "")
+{
+  alert("Please enter a Time Zone");
+}
+else {
+
+
   firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {  // Handle Errors here.
   var errorCode = error.code;
   var errorMessage = error.message;
@@ -86,14 +144,28 @@ margin-left: 270px;
        Username: username,
        email: email,
        money: 0
+       steam: steam,
+       PSN: PSN,
+       xbox: XBL,
+       Fortnite: Fortnite,
+       timezone: x
+
      });
 isSuccessful = true;
 
 setTimeout(function () {
 changepage();
 }, 2000);
+
     }
     });
+
+}
+
+
+
+
+
   }
 
 
@@ -126,9 +198,45 @@ function changepage(){
 <br />
 <center>
 
-<input id ="txtUserName" type="text" placeholder="UserName"> <br />
-<input id ="txtEmail" type="email" placeholder="Email"> <br />
-<input id ="txtPassword" type="password" placeholder="password"> <br />
+<input class="edit" id ="txtUserName" type="text" placeholder="UserName"> <br />
+<input class="edit" id ="txtFortNiteUsername" type="text" placeholder="Fortnite Username"> <br />
+<input class="edit" id ="txtPSN" type="text" placeholder="PSN"> <br />
+<input class="edit" id ="txtXboxGamertag" type="text" placeholder="Xbox Gamertag"> <br />
+<input class="edit" id ="txtSteam" type="text" placeholder="Steam"> <br />
+
+
+
+
+<input class="edit" id ="txtEmail" type="email" placeholder="Email"> <br />
+<input class="edit" id ="txtPassword" type="password" placeholder="password"> <br />
+<input class="edit" id ="txtPasswordRe" type="password" placeholder="password"> <br />
+<h4> Time Zone </h4>
+<input type="radio" id="Time"
+  name="Time" value="ET">
+  ET
+
+  <input type="radio" id="Time"
+    name="Time" value="CT">
+    CT
+
+    <input type="radio" id="Time"
+      name="Time" value="MT">
+      MT
+      <input type="radio" id="Time"
+        name="Time" value="PT">
+        PT
+
+
+        <input type="radio" id="Time"
+          name="Time" value="PT">
+          HT
+
+          <input type="radio" id="Time"
+            name="Time" value="PT">
+            AKT
+
+<br />
+
 <button onclick="register();" id ="btnRegister"> Register </button>
 </center>
 </div>
