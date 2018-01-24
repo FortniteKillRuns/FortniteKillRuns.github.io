@@ -160,7 +160,7 @@ return firebase.database().ref(userId + '/Username/').once('value').then(functio
 
 
 
-  return firebase.database().ref('Duos' + '/Buyin/').once('value').then(function(snapshot) {
+  return firebase.database().ref('Singles' + '/Buyin/').once('value').then(function(snapshot) {
     var buyin = snapshot.val();
 
   document.getElementById("Buyin").innerHTML = "Buy in: $" + buyin;
@@ -168,7 +168,7 @@ return firebase.database().ref(userId + '/Username/').once('value').then(functio
 
 
 
-  return firebase.database().ref('Duos/Payout/').once('value').then(function(snapshot) {
+  return firebase.database().ref('Singles/Payout/').once('value').then(function(snapshot) {
     var Payout = snapshot.val();
     // ...
     document.getElementById("Payout").innerHTML = "Payout: " + Payout;
@@ -176,16 +176,16 @@ return firebase.database().ref(userId + '/Username/').once('value').then(functio
 
 
 
-    return firebase.database().ref('Duos/Time/').once('value').then(function(snapshot) {
+    return firebase.database().ref('Singles/Time/').once('value').then(function(snapshot) {
       var Time = snapshot.val();
       // ...
       document.getElementById("Time").innerHTML = "Time: " + Time;
 
-      return firebase.database().ref('Duos/Key/').once('value').then(function(snapshot) {
+      return firebase.database().ref('Singles/Key/').once('value').then(function(snapshot) {
          Key = snapshot.val();
          checkifonteam();
         // ...
-        return firebase.database().ref('Duos/Teamcount/Teamcount').once('value').then(function(snapshot) {
+        return firebase.database().ref('Singles/Teamcount/Teamcount').once('value').then(function(snapshot) {
            var Teamss = snapshot.val();
            document.getElementById("Teams").innerHTML = "Teams: " + Teamss;
           // ...
@@ -229,7 +229,7 @@ teamkeyy = teamkey;
 var database = firebase.database();
 database.ref(Key + "/Players/").once('value', function(snapshot) {
   if (snapshot.hasChild(userId)) {
-    document.getElementById("join").style.visibility = "hidden";
+
     document.getElementById("leave").style.visibility = "visible";
         document.getElementById("create").style.visibility = "hidden";
           document.getElementById("teamkey").style.visibility = "visible";
@@ -266,7 +266,7 @@ database.ref(Key + "/Players/").once('value', function(snapshot) {
 
 
   }else{
-    document.getElementById("join").style.visibility = "visible";
+
     document.getElementById("leave").style.visibility = "hidden";
         document.getElementById("create").style.visibility = "visible";
   }
@@ -277,66 +277,6 @@ database.ref(Key + "/Players/").once('value', function(snapshot) {
   }
 
 
-function jointeam(){
-var text;
-  var lol;
-
-
-     text = prompt("Team Code");
-
-    return firebase.database().ref(Key + '/Teams/' + text + "/Exist/Exist/").once('value').then(function(snapshot) {
-       lol = snapshot.val();
-
-       if(lol == null)
-       {
-         alert("Team does not exist");
-       }
-       else if(lol == false)
-       {
-         alert("Team is full");
-       }
-       else {
-         firebase.database().ref(Key + "/Teams/" + text + "/Exist/").set({
-          Exist: false,
-
-         });
-
-         firebase.database().ref(Key + "/Teams/" + text + "/players/" + username).set({
-          Username: username,
-
-        });
-
-        firebase.database().ref(Key + "/Teams/" + text + "/Playerusernames/" + userId).set({
-         Username: username,
-
-       });
-
-       firebase.database().ref(Key + "/Players/" + userId).set({
-        teamcode: text,
-
-       });
-
-       firebase.database().ref(Key + "/Teams/" + text + "/playercount/").set({
-        playercount: 2,
-
-       });
-
-
-
-
-    window.location.href = "Duos.htm";
-
-       }
-      // ...
-
-    });
-
-
-
-
-
-
-}
 
 function signout(){
   firebase.auth().signOut().then(function() {
@@ -352,7 +292,7 @@ function signout(){
 function registerteam(){
   var text = makeid();
   var userId = firebase.auth().currentUser.uid;
-  var teamname = prompt("What is your team name?");
+  var teamname = username;
   if(teamname == null)
   {
   }
@@ -360,11 +300,11 @@ function registerteam(){
 
 
 
-    return firebase.database().ref('Duos/Teamcount/Teamcount/').once('value').then(function(snapshot) {
+    return firebase.database().ref('Singles/Teamcount/Teamcount/').once('value').then(function(snapshot) {
        var Teamss = snapshot.val();
        var x = Number(Teamss);
        var y = x + 1;
-       firebase.database().ref('Duos/Teamcount').set({
+       firebase.database().ref('Singles/Teamcount').set({
         Teamcount: y,
 
        });
@@ -395,11 +335,11 @@ function registerteam(){
      });
 
       // ...
-      alert("Give this code to your friends so they can join your team: " + text);
+
       //var teamcode = prompt("Enter your team code; Give this code to your friends so they can join your team");
 
 
-        window.location.href = "Duos.htm";
+        window.location.href = "Singles.htm";
     });
 
 
@@ -431,11 +371,11 @@ var teamkey;
       firebase.database().ref(Key + "/Teams/" + teamkey).remove();
 
 
-      return firebase.database().ref('Duos/Teamcount/Teamcount/').once('value').then(function(snapshot) {
+      return firebase.database().ref('Singles/Teamcount/Teamcount/').once('value').then(function(snapshot) {
          var Teamss = snapshot.val();
          var x = Number(Teamss);
          var y = x - 1;
-         firebase.database().ref('Duos/Teamcount').set({
+         firebase.database().ref('Singles/Teamcount').set({
           Teamcount: y,
 
          });
@@ -487,7 +427,7 @@ function makeid() {
 
   <div id = "container">
 <center>
-  <h1 id="Duos">Duos</h1><br />
+  <h1 id="Singles">Singles</h1><br />
   <h1 id="Payout">j</h1>
   <h1 id="Buyin">j</h1>
   <h1 id="Teams"></h1>
@@ -502,7 +442,7 @@ function makeid() {
   <br />
   <br />
   <br />
-  <button onclick="jointeam();" id="join"> Join Team </button>
+
   <button onclick="registerteam();" id="create"> Create Team </button>
 
     </center>

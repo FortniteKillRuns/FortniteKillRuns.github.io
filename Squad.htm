@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <style type="text/css">
+  body{
+  background-color: #2c70d3;
+  height: auto;
+  width: auto;
+
+
+
+  }
+
+  #header{
+    background-color: black;
+    height: 70px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+  }
+
+
+  #title{
+
+
+    display: inline;
+    color: #2c70d3;
+    text-align: center;
+  margin-left: 390px;
+
+  }
+
+  #container{
+    height: 600px;
+    width:895px;
+    background-color: white;
+    display: inline;
+    float: right;
+    border-radius: 10px;
+  }
+
+  #Username{
+  display: inline;
+    color: white;
+margin-left: 90px;
+
+    visibility: visible;
+  }
+
+  #signoutbut{
+    float:right;
+    visibility: hidden;
+
+
+    border-style: 1px;
+    border-color: #2c70d3;
+    color: #2c70d3;
+
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+
+  #footer{
+
+    height: 70px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+
+
+  }
+
+  a:link    {
+    /* Applies to all unvisited links */
+    text-decoration:  none;
+    font-weight:      bold;
+
+
+    }
+  a:visited {
+    /* Applies to all visited links */
+    text-decoration:  none;
+    font-weight:      bold;
+
+    }
+  a:hover   {
+    /* Applies to links under the pointer */
+    text-decoration:  underline;
+    font-weight:      bold;
+
+    }
+  a:active  {
+    /* Applies to activated links */
+    text-decoration:  underline;
+    font-weight:      bold;
+
+    }
+
+
+    #join, #create, #leave{
+
+
+
+
+
+      border-style: 1px;
+      border-color: #2c70d3;
+      color: #2c70d3;
+
+      padding: 5px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      border-radius: 10px;
+      visibility: hidden;
+
+
+    }
+
+    #teamkey, #roster{
+      visibility: hidden;
+    }
+
+
+
+
+
+  </style>
+
+  <script type="text/javascript">
+
+  var Key;
+  var username;
+  var userId;
+  var teamkeyy;
+
+  var array_name = [];
+    function checkifusersignedin(){
+
+
+  var database = firebase.database();
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          user= user;
+
+  document.getElementById("signoutbut").style.visibility = "visible";
+  document.getElementById("Username").style.visibility = "visible";
+           userId = firebase.auth().currentUser.uid;
+
+  return firebase.database().ref(userId + '/Username/').once('value').then(function(snapshot) {
+     username = snapshot.val();
+
+    document.getElementById("Username").innerHTML = username;
+
+
+
+    return firebase.database().ref('Squad' + '/Buyin/').once('value').then(function(snapshot) {
+      var buyin = snapshot.val();
+
+    document.getElementById("Buyin").innerHTML = "Buy in: $" + buyin;
+
+
+
+
+    return firebase.database().ref('Squad/Payout/').once('value').then(function(snapshot) {
+      var Payout = snapshot.val();
+      // ...
+      document.getElementById("Payout").innerHTML = "Payout: " + Payout;
+
+
+
+
+      return firebase.database().ref('Squad/Time/').once('value').then(function(snapshot) {
+        var Time = snapshot.val();
+        // ...
+        document.getElementById("Time").innerHTML = "Time: " + Time;
+
+        return firebase.database().ref('Squad/Key/').once('value').then(function(snapshot) {
+           Key = snapshot.val();
+           checkifonteam();
+          // ...
+          return firebase.database().ref('Squad/Teamcount/Teamcount').once('value').then(function(snapshot) {
+             var Teamss = snapshot.val();
+             document.getElementById("Teams").innerHTML = "Teams: " + Teamss;
+            // ...
+
+          });
+        });
+
+      });
+
+    });
+    });
+  });
+
+
+
+
+
+
+
+
+  var random = 5;
+
+        } else {
+          // No user is signed in.
+  window.location.href = "index.htm";
+      }
+
+
+
+
+
+    });
+
+
+    }
+
+
+      function checkifonteam(){
+    var teamkey;
+    teamkeyy = teamkey;
+    var database = firebase.database();
+    database.ref(Key + "/Players/").once('value', function(snapshot) {
+      if (snapshot.hasChild(userId)) {
+        document.getElementById("join").style.visibility = "hidden";
+        document.getElementById("leave").style.visibility = "visible";
+            document.getElementById("create").style.visibility = "hidden";
+              document.getElementById("teamkey").style.visibility = "visible";
+              document.getElementById("roster").style.visibility = "visible";
+
+              return firebase.database().ref(Key + "/Players/" + userId + "/teamcode/").once('value').then(function(snapshot) {
+                  teamkey = snapshot.val();
+
+                 document.getElementById("teamkey").innerHTML = "Team code: " + teamkey;
+                // ...
+
+                database.ref(Key + "/Teams/" + teamkey + "/players/").once('value',function(snap) {
+                  snap.forEach(function(item) {
+                  var itemVal = item.val();
+                  array_name.push(itemVal);
+
+                });
+                for (i = 0; i < array_name.length; i++) {
+            document.getElementById("playerone").innerHTML += array_name[i].Username; + "<br />";
+          }
+
+
+
+
+              });
+
+
+
+
+
+              });
+
+
+
+
+      }else{
+        document.getElementById("join").style.visibility = "visible";
+        document.getElementById("leave").style.visibility = "hidden";
+            document.getElementById("create").style.visibility = "visible";
+      }
+    });
+
+
+
+      }
+
+
+
+    function registerteam(){
+      var text = makeid();
+      var userId = firebase.auth().currentUser.uid;
+      var teamname = prompt("What is your team name?");
+      if(teamname == null)
+      {
+      }
+      else {
+
+
+
+        return firebase.database().ref('Squad/Teamcount/Teamcount/').once('value').then(function(snapshot) {
+           var Teamss = snapshot.val();
+           var x = Number(Teamss);
+           var y = x + 1;
+           firebase.database().ref('Squad/Teamcount').set({
+            Teamcount: y,
+
+           });
+
+           firebase.database().ref(Key + "/Teams/" + text + "/teamname/").set({
+            Teamname: teamname,
+
+          });
+
+           firebase.database().ref(Key + "/Teams/" + text + "/Playerids/" + userId).set({
+            Username: username,
+
+          });
+
+          firebase.database().ref(Key + "/Teams/" + text + "/players/" + username).set({
+           Username: username,
+
+         });
+
+         firebase.database().ref(Key + "/Players/" + userId).set({
+          teamcode: text,
+
+         });
+
+         firebase.database().ref(Key + "/Teams/" + text + "/Exist/").set({
+          Exist: 1,
+
+         });
+
+         firebase.database().ref(Key + "/Teams/" + text + "/playercount/").set({
+          playercount: 1,
+
+         });
+
+          // ...
+          alert("Give this code to your friends so they can join your team: " + text);
+          //var teamcode = prompt("Enter your team code; Give this code to your friends so they can join your team");
+
+
+            window.location.href = "Squad.htm";
+        });
+
+
+
+    }
+    }
+
+    function leaveteam(){
+
+    var teamkey;
+      return firebase.database().ref(Key + "/Players/" + userId + "/teamcode/").once('value').then(function(snapshot) {
+          teamkey = snapshot.val();
+
+      firebase.database().ref(Key + "/Players/" + userId).remove();
+      firebase.database().ref(Key + "/Teams/" + teamkey + userId).remove();
+      firebase.database().ref(Key + "/Teams/" + teamkey + "/Playerids/" + userId).remove();
+      firebase.database().ref(Key + "/Teams/" + teamkey + "players" + username).remove();
+
+
+
+
+      return firebase.database().ref(Key + "/Teams/" + teamkey + "/playercount/" + "/playercount/").once('value').then(function(snapshot) {
+         var players = snapshot.val();
+         var x = Number(players);
+         var y = x-1;
+
+        if((x-1) == 0)
+        {
+          firebase.database().ref(Key + "/Teams/" + teamkey).remove();
+
+
+          return firebase.database().ref('Squad/Teamcount/Teamcount/').once('value').then(function(snapshot) {
+             var Teamss = snapshot.val();
+             var x = Number(Teamss);
+             var y = x - 1;
+             firebase.database().ref('Squad/Teamcount').set({
+              Teamcount: y,
+
+             });
+
+
+
+
+        });}
+        else{
+          firebase.database().ref(Key + "/Teams/" + teamkey + "/playercount/").set({
+           playercount: y,
+
+          });
+
+          firebase.database().ref(Key + "/Teams/" + teamkey + "/Exist/").set({
+           Exist: true,
+
+          });
+
+        }
+
+      window.location.href = "Squad.htm";
+
+    });
+    });
+    }
+
+    function makeid() {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for (var i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    }
+
+
+
+
+
+    function jointeam(){
+    var text;
+      var lol;
+
+
+         text = prompt("Team Code");
+
+        return firebase.database().ref(Key + '/Teams/' + text + "/Exist/Exist/").once('value').then(function(snapshot) {
+           lol = snapshot.val();
+           var y = lol + 1;
+
+           if(lol == null)
+           {
+             alert("Team does not exist");
+           }
+           else if(lol > 3)
+           {
+             alert("Team is full");
+           }
+           else {
+             firebase.database().ref(Key + "/Teams/" + text + "/Exist/").set({
+              Exist: y,
+
+             });
+
+             firebase.database().ref(Key + "/Teams/" + text + "/players/" + username).set({
+              Username: username,
+
+            });
+
+            firebase.database().ref(Key + "/Teams/" + text + "/Playerusernames/" + userId).set({
+             Username: username,
+
+           });
+
+           firebase.database().ref(Key + "/Players/" + userId).set({
+            teamcode: text,
+
+           });
+
+           firebase.database().ref(Key + "/Teams/" + text + "/playercount/").set({
+            playercount: 2,
+
+           });
+
+
+
+
+        window.location.href = "Squad.htm";
+
+           }
+          // ...
+
+        });
+
+
+
+
+
+
+    }
+
+  </script>
+  <body onload="checkifusersignedin();" id="body">
+
+    <div id="header">
+      <br />
+  <button onclick="signout();" id="signoutbut" style = "margin-left:5px;"> Sign out </button>
+  <a href="profile.htm"><h1 class="logreg" style=""id="Username"></h1></a>
+          <a href="index.htm">  <h1 id="title">Fortnite Kill Runs </h1></a>
+
+
+  <br />
+  <br />
+
+  <a class="twitter-timeline"  height="600px" width="300px" href="https://twitter.com/FortniteMoney8s?ref_src=twsrc%5Etfw">Tweets by FortniteMoney8s</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  <div id = "container">
+    <center>
+      <h1 id="Squads">Squads</h1><br />
+      <h1 id="Payout">j</h1>
+      <h1 id="Buyin">j</h1>
+      <h1 id="Teams"></h1>
+      <h1 id="Time">j</h1>
+      <h1 id="teamkey"><h1>
+        <h1 id="roster"> Team Roster:</h1>
+    <h2 id="playerone"> </h2>
+    <h2 id="playertwo"> </h2>
+    <button onclick="leaveteam();" id="leave"> Leave Team </button>
+
+
+      <br />
+      <br />
+      <br />
+      <button onclick="jointeam();" id="join"> Join Team </button>
+      <button onclick="registerteam();" id="create"> Create Team </button>
+
+        </center>
+
+
+  </div>
+  </div>
+  <br />
+  <div id="footer">
+
+  </div>
+
+    </div>
+    <scipt src = "fireba.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAhLm5VzFkrYgmnNGvf8DP5kbQeoGNqtH0",
+        authDomain: "fortnite-52f2c.firebaseapp.com",
+        databaseURL: "https://fortnite-52f2c.firebaseio.com",
+        projectId: "fortnite-52f2c",
+        storageBucket: "",
+        messagingSenderId: "143505131996"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
