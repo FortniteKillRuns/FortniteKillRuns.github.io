@@ -138,6 +138,19 @@ margin-left: 90px;
 
   <script type="text/javascript">
 
+
+
+  function signout(){
+    firebase.auth().signOut().then(function() {
+
+      location.reload();
+    console.log('Signed Out');
+  }, function(error) {
+    console.error('Sign Out Error', error);
+  });
+  }
+
+
   var Key;
   var username;
   var userId;
@@ -252,7 +265,7 @@ margin-left: 90px;
 
                 });
                 for (i = 0; i < array_name.length; i++) {
-            document.getElementById("playerone").innerHTML += array_name[i].Username; + "<br />";
+            document.getElementById("playerone").innerHTML += array_name[i].Username + "<br />";
           }
 
 
