@@ -64,9 +64,9 @@ margin-left: 390px;
 #Username{
 display: inline;
 font-family: sans-serif;
-  color: white;
+  color: #660066;
   margin-left: -150px;
-  visibility: hidden;
+visibility: hidden;
 }
 
 #signoutbut{
@@ -229,7 +229,7 @@ text-align: center;
 }
 #bacl{
   display: inline;
-  
+
   margin-left: 320px;
   text-align: center;
 
@@ -299,14 +299,14 @@ return firebase.database().ref(userId + '/Username/').once('value').then(functio
     <br />
   <a href="login.htm" id="mainlog">  <button class="logreg"> Login </button></a>
   <a href="Register.htm" id="mainreg">  <button class="logreg" style = "margin-left:5px;"> Register </button></a>
-
+<h1 class="logreg" style=""id="Username">kk</h1>
 <div id="bacl">  <a href="index.htm"><h3 id="one">Home     </h3></a></div>
   <a href="versus.htm"><h3 id="two"> Versus </h3></a>
     <a href="rules.htm">  <h3 id="three"> Rules </h3></a>
       <a href="">  <h3 id="four"> </h3></a>
 
 <button onclick="signout();" id="signoutbut" style = "margin-left:5px;"> Sign out </button>
-<h1 class="logreg" style=""id="Username"></h1>
+
 <div id="Menu">
   <br />
 
