@@ -93,7 +93,7 @@ display: inline;
 #single{
 
 
-  height: 425px;
+  height: 375px;
   width: 250px;
   display: inline;
   float:left;
@@ -105,7 +105,7 @@ display: inline;
 }
 
 #duos{
-  height: 425px;
+  height: 375px;
   width: 250px;
   display: inline;
   float:left;
@@ -116,7 +116,7 @@ display: inline;
 }
 
 #squad{
-  height: 425px;
+  height: 375px;
   width: 250px;
   float: left;
   display: inline;
@@ -143,6 +143,43 @@ display: inline;
   border-radius: 10px;
 
 
+}
+
+a:link    {
+  /* Applies to all unvisited links */
+  color: black;
+  text-decoration:  none;
+  font-weight:      bold;
+
+
+  }
+a:visited {
+  /* Applies to all visited links */
+  text-decoration:  none;
+  color: black;
+  font-weight:      bold;
+
+  }
+a:hover   {
+  /* Applies to links under the pointer */
+  text-decoration:  none;
+  color: black;
+  font-weight:      bold;
+
+  }
+a:active  {
+  /* Applies to activated links */
+  text-decoration:  none;
+  color: black;
+  font-weight:      bold;
+
+  }
+
+#one, #two, #three, #four{
+
+  display: inline;
+  margin-left: 20px;
+  margin-top:20px;
 }
 #xfian{
     font-size: 20px;
@@ -221,6 +258,15 @@ return firebase.database().ref(userId + '/Username/').once('value').then(functio
 <a class="twitter-timeline"  height="600px" width="300px" href="https://twitter.com/FortniteMoney8s?ref_src=twsrc%5Etfw">Tweets by FortniteMoney8s</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <div id = "container">
+  <div id="Menu">
+    <br />
+  <a href="index.htm"><h3 id="one"> Home </h3></a>
+  <a href="versus.htm"><h3 id="two"> Versus </h3></a>
+    <a href="rules.htm">  <h3 id="three"> Rules </h3></a>
+      <a href="">  <h3 id="four"> </h3></a>
+
+
+</div>
 <h2 style="text-align:center; font-size: 50px;"> Todays Runs</h2>
 
 <div id="single">

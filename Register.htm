@@ -80,6 +80,36 @@ border-bottom: 1px solid #ccc;
 background-color: transparent;
 }
 
+a:link    {
+  /* Applies to all unvisited links */
+  color: black;
+  text-decoration:  none;
+  font-weight:      bold;
+
+
+  }
+a:visited {
+  /* Applies to all visited links */
+  text-decoration:  none;
+  color: black;
+  font-weight:      bold;
+
+  }
+a:hover   {
+  /* Applies to links under the pointer */
+  text-decoration:  none;
+  color: black;
+  font-weight:      bold;
+
+  }
+a:active  {
+  /* Applies to activated links */
+  text-decoration:  none;
+  color: black;
+  font-weight:      bold;
+
+  }
+
 </style>
 
   <script type="text/javascript">
@@ -143,7 +173,7 @@ else {
       firebase.database().ref(user.uid).set({
        Username: username,
        email: email,
-       money: 0
+       money: 0,
        steam: steam,
        PSN: PSN,
        xbox: XBL,
