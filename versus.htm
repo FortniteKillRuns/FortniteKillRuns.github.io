@@ -199,7 +199,7 @@ document.getElementById("signoutbut").style.visibility = "visible"
 document.getElementById("Username").style.visibility = "visible"
         var userId = firebase.auth().currentUser.uid;
 return firebase.database().ref(userId + '/Username/').once('value').then(function(snapshot) {
-  var username = snapshot.val();
+   username = snapshot.val();
   checkifonteam();
   // ...
   document.getElementById("Username").innerHTML = username;
@@ -216,6 +216,7 @@ return firebase.database().ref(userId + '/Username/').once('value').then(functio
   var teamkey;
   teamkeyy = teamkey;
   var database = firebase.database();
+
   database.ref("FortniteWagers" + "/Players/").once('value', function(snapshot) {
     if (snapshot.hasChild(userId)) {
       document.getElementById("join").style.visibility = "hidden";
@@ -347,6 +348,7 @@ return firebase.database().ref(userId + '/Username/').once('value').then(functio
     var text = makeid();
     var userId = firebase.auth().currentUser.uid;
     var teamname = prompt("What is your team name?");
+
     if(teamname == null)
     {
     }
