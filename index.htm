@@ -197,6 +197,7 @@ a:active  {
   text-align: center;
 margin-left: 200px;
 }
+
  #two, #three, #four{
 text-align: center;
 font-family: sans-serif;
@@ -301,10 +302,13 @@ return firebase.database().ref(userId + '/Username/').once('value').then(functio
   <a href="login.htm" id="mainlog">  <button class="logreg"> Login </button></a>
   <a href="Register.htm" id="mainreg">  <button class="logreg" style = "margin-left:5px;"> Register </button></a>
 <h1 class="logreg" style=""id="Username">kk</h1>
+
+<div id="menu">
 <div id="bacl">  <a href="index.htm"><h3 id="one">Home     </h3></a></div>
   <a href="versus.htm"><h3 id="two"> Versus </h3></a>
-    <a href="rules.htm">  <h3 id="three"> Rules </h3></a>
+    <a href="Rules.htm">  <h3 id="three"> Rules </h3></a>
       <a href="">  <h3 id="four"> </h3></a>
+    </div>
 
 <button onclick="signout();" id="signoutbut" style = "margin-left:5px;"> Sign out </button>
 

@@ -5,19 +5,23 @@
   <title> Fortnite Kill Runs </title>
 <style type="text/css">
 body{
-background-color: #2c70d3;
+background-color: #2b2b2b;
 height: auto;
 width: auto;
+font-family: sans-serif;
+
 
 
 }
 
 #header{
-  background-color: black;
+  background-color:  #660066;
   height: 70px;
   width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 10px;
+  font-family: sans-serif;
 }
 
 .logreg{
@@ -109,6 +113,109 @@ a:active  {
   font-weight:      bold;
 
   }
+
+
+
+  #menu{
+    display: inline;
+    font-family: sans-serif;
+    text-align: center;
+  margin-left: 427px;
+  }
+
+  #two, #three, #four{
+  text-align: center;
+  font-family: sans-serif;
+   display: inline;
+   margin-left: 20px;
+
+   margin-top:20px;
+
+   color: white;
+  }
+
+  #one, #two, #three, #four{
+  text-align: center;
+   display: inline;
+
+
+   margin-top:20px;
+
+   color: white;
+  }
+
+  #header{
+    background-color: #660066;
+    height: 70px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .logreg{
+    background-color: white; /* Green */
+  border-style: 1px;
+  border-color: #2c70d3;
+  color: #2c70d3;
+  margin-left: 30px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 10px;
+
+  }
+
+  #btnlogin{
+    border-style: 1px;
+    border-color: #2c70d3;
+    color: #2c70d3;
+
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    background-color: white;
+    border-radius: 10px;
+  }
+
+
+  .edit{
+    border: 0;
+  padding: 4px 0;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  color: white;
+  }
+
+  #title{
+
+
+    display: inline;
+    color: #2c70d3;
+    text-align: center;
+  margin-left: 270px;
+
+  }
+
+  #container{
+    height: 600px;
+    width:895px;
+    background-color: #660066;
+    display: inline;
+    float: right;
+    border-radius: 10px;
+  }
+
+  #one{
+      height: 500px;
+  text-align: center;
+
+
+  }
+
 
 </style>
 
@@ -215,7 +322,16 @@ function changepage(){
     <a href="Register.htm">   <button class="logreg" style = "margin-left:5px;"> Register </button></a>
 
 
-      <a href="index.htm">  <h1 id="title">Fortnite Kill Runs </h1></a>
+    <div id="menu">
+       <a href="index.htm"><h3 id="one">Home     </h3></a>
+        <a href="versus.htm"><h3 id="two"> Versus </h3></a>
+          <a href="Rules.htm">  <h3 id="three"> Rules </h3></a>
+            <a href="">  <h3 id="four"> </h3></a>
+    </div>
+
+
+    <br />
+    <br />
 
 
 <br />
@@ -224,7 +340,7 @@ function changepage(){
 <a class="twitter-timeline"  height="600px" width="300px" href="https://twitter.com/FortniteMoney8s?ref_src=twsrc%5Etfw">Tweets by FortniteMoney8s</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <div id = "container">
-<h2 style="text-align:center; font-size: 50px;"> Register</h2>
+<h2 style="text-align:center; font-size: 50px; color: white;"> Register</h2>
 <br />
 <center>
 
@@ -240,33 +356,33 @@ function changepage(){
 <input class="edit" id ="txtEmail" type="email" placeholder="Email"> <br />
 <input class="edit" id ="txtPassword" type="password" placeholder="password"> <br />
 <input class="edit" id ="txtPasswordRe" type="password" placeholder="password"> <br />
-<h4> Time Zone </h4>
+<h4 style="color: white;"> Time Zone </h4>
 <input type="radio" id="Time"
   name="Time" value="ET">
-  ET
+  <div style="display:inline; color: white;" >ET </div>
 
   <input type="radio" id="Time"
     name="Time" value="CT">
-    CT
+  <div style="display:inline; color: white;" >CT </div>
 
     <input type="radio" id="Time"
       name="Time" value="MT">
-      MT
+    <div style="display:inline; color: white;" >MT </div>
       <input type="radio" id="Time"
         name="Time" value="PT">
-        PT
+        <div style="display:inline; color: white;" >PT </div>
 
 
         <input type="radio" id="Time"
           name="Time" value="PT">
-          HT
+        <div style="display:inline; color: white;" >HT </div>
 
           <input type="radio" id="Time"
             name="Time" value="PT">
-            AKT
+          <div style="display:inline; color: white;" >AKT </div>
 
 <br />
-
+<br />
 <button onclick="register();" id ="btnRegister"> Register </button>
 </center>
 </div>
